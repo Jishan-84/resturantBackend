@@ -28,7 +28,8 @@ const login = async (userdata) => {
 
     const userObj = {
         email: isUserExist?.email,
-        role: isUserExist.role
+        role: isUserExist.role,
+        userId: isUserExist?._id
     }
     const token = jwt.sign(userObj, "restaurant123", { expiresIn: "7d" })
     return {

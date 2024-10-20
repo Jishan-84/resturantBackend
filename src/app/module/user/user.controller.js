@@ -39,9 +39,8 @@ const getSingleUser = async (req, res, next) => {
     }
 }
 const myProfile = async (req, res, next) => {
-    const decode = jwt.verify(req.headers.authorization, "restaurant123")
-    console.log(decode)
     try {
+        const decode = jwt.verify(req.headers.authorization, "restaurant123")
         const result = await userServices.myProfile(decode?.email)
         res.status(200).json({
             message: "user retrieved successfull",
