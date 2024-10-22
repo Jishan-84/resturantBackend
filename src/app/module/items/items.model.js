@@ -5,6 +5,11 @@ const itemSchema = new Schema({
         type: String,
         required: [true, "title is required"]
     },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+        required: [true, "category is required"]
+    },
     description: {
         type: String,
         required: [true, "description is required"]
@@ -22,3 +27,5 @@ const itemSchema = new Schema({
 
 
 const Item = model("Item", itemSchema)
+
+export default Item
