@@ -6,7 +6,13 @@ const insertItemIntoDb = async (data) => {
     return result
 }
 const getAllItems = async (query) => {
-    const result = await Item.find(query).populate({ path: "category", select: "title" })
+    const { searchTerm } = query
+    let newQuery = { ...query }
+
+    if (searchTerm) {
+        newQuery = { title: { '$regex': searchTerm, '$options': 'i' } }
+    }
+    const result = await Item.find(newQuery).populate({ path: "category", select: "title" })
     return result
 }
 
