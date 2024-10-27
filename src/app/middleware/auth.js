@@ -18,18 +18,13 @@ export const isAdmin = async (req, res, next) => {
     next()
 }
 
-
-// isCustomer
 export const isCustomer = async (req, res, next) => {
     const token = req.headers.authorization
     const decode = jwt.verify(token, "restaurant123")
-
-    //    step -1
     const isUserExist = await User.findById(decode?.userId)
     if (!isUserExist) {
         throw new Apperror(400, "user not exist")
     }
-
     if (decode?.role !== "customer") {
         throw new Apperror(401, "you are not authorized")
     }
